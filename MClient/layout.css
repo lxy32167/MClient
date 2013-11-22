@@ -1,0 +1,203 @@
+body
+{
+	font-family: Verdana;
+	font-size: 14px;
+	margin: 0;
+}
+
+#container
+{
+	margin: 0 auto;
+	width: 100%;
+}
+#header
+{
+	background: #D2D2D2;
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+	border: groove 3px #fff;
+	border-collapse: collapse;
+}
+#header_two
+{
+	background: #D2D2D2;
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+	border: groove 3px #fff;
+	border-collapse: collapse;
+}
+#mainContent
+{
+	height: 600px;
+	margin-bottom: 5px;
+}
+#sidebar
+{
+	float: right;
+	width: 20%;
+	height: 600px;
+	background: #D2D2D2;
+}
+#givescore
+{
+	width: 100%;
+	height: 20px;
+	background: #666666;
+	border: groove 1px #fff;
+	border-collapse: collapse;
+}
+#sidebarup
+{
+	width: 98%;
+	height: 100px;
+	background: #D2D2D2;
+}
+#stuname
+{
+	width: 100%;
+	height: 20px;
+	background: #D2D2D2;
+	border: dashed 1px #fff;
+	border-collapse: collapse;
+}
+#checkname
+{
+	width: 100%;
+	height: 20px;
+	background: #666666;
+	border: groove 1px #fff;
+	border-collapse: collapse;
+}
+#qty
+{
+	width: 100%;
+	height: 20px;
+	background: #666666;
+	border: groove 1px #fff;
+	border-collapse: collapse;
+}
+.sidebardown
+{
+	width: 100%;
+	background: #D2D2D2;
+}
+#content
+{
+	float: left;
+	width: 79.5%;
+	height: 600px;
+	background: #D2D2D2;
+	border: groove 1.5px #fff;
+	border-collapse: collapse;
+}
+/*因为是固定宽度，采用左右浮动方法可有效避免ie 3像素bug*/
+
+#contentLogin
+{
+	float: left;
+	width: 79.5%;
+	height: 600px;
+	background: #D2D2D2;
+}
+#footer
+{
+	height: 20px;
+	background: #709BCE;
+	border: groove 3px #fff;
+	border-collapse: collapse;
+}
+#content
+{
+	font-family: Verdana;
+	font-size: 9pt;
+}
+
+.loginbody
+{
+	font: 9pt verdana;
+	background-color: lightBlue;
+	border: solid 3px black;
+	padding: 4px;
+}
+
+.login_title
+{
+	background-color: DarkBlue;
+	color: white;
+	font-weight: bold;
+	font-family: Verdana;
+}
+
+.login_instructions
+{
+	font-size: 12px;
+	text-align: left;
+	padding: 10px;
+	font-family: Verdana;
+}
+
+.login_button
+{
+	border: solid 1px black;
+	padding: 3px;
+	font-family: Verdana;
+}
+
+.FootDate
+{
+	float: right;
+}
+.auto-style1
+{
+	height: 16px;
+}
+.auto-style2
+{
+	height: 23px;
+}
+.auto-style3
+{
+	height: 17px;
+}
+.Bar
+{
+	position: relative;
+	width: 200px; /* 宽度 */
+	border: 1px solid #B1D632;
+	padding: 1px;
+	background: #FFFFFF;
+}
+#lbEffective
+{
+	display: block;
+	position: relative;
+	background: #008000; /* 进度条背景颜色 */
+	color: #000000;
+	height: 20px; /* 高度 */
+	line-height: 20px; /* 必须和高度一致，文本才能垂直居中 */
+}
+.Bar div span
+{
+	position: absolute;
+	width: 200px; /* 宽度 */
+	text-align: center;
+	font-weight: bold;
+}
+#lbPerOK
+{
+	display: block;
+	position: relative;
+	background: #60BF00; /* 进度条背景颜色 */
+	color: #000000;
+	height: 20px; /* 高度 */
+	line-height: 20px; /* 必须和高度一致，文本才能垂直居中 */
+}
+#lbBlkOK
+{
+	display: block;
+	position: relative;
+	background: #59FF59; /* 进度条背景颜色 */
+	color: #000000;
+	height: 20px; /* 高度 */
+	line-height: 20px; /* 必须和高度一致，文本才能垂直居中 */
+}
