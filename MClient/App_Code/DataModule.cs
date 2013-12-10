@@ -122,7 +122,7 @@ namespace MClient.App_Code
         public List<UMyRecords.stMyPaper> JunkList;
         public List<UMyRecords.stStatusInfo> StatusList;
         public List<UMyRecords.stMyPaper> CheckList;  //保存抽查的试卷
-        public Object CsSocket, CsNewPaper, CsGetPaper, CsOldPaper, CsSavePaper, CsJunk, CsCheck, CsExcpRsn;
+        public Object CsSocket, CsNewPaper, CsGetPaper, CsOldPaper, CsSavePaper, CsJunk, CsCheck, CsExcpRsn,CsLogFile;
         public Object CsGrpUser, CsQtyInfo, CsStatusInfo, CsQty, CsRate;
         public Object CsNextPaper, CsNextPaperNode, CsPreviewPaper, CsExpPaper;
         public Boolean LastPaper; //原本是F_Check的变量,但ASP.NET无法传值给页面类

@@ -399,6 +399,8 @@ namespace MClient.App_Code
         public const int JPG = 3;
         public const int BMP = 5;
         public const int JP2 = 13;
+        public const int STAT_DEL = 7;
+        public const int STAT_ADD = 8;
         //图片路径长度
         public const int PICPATHLEN = 256;     // 图片路径最大长度
         public const int SERVERIPLEN = 16;     // 图片所在服务器IP地址长度
