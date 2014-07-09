@@ -9,6 +9,7 @@ using System.Threading;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Data;
+using ADOX;
 namespace MClient.App_Code
 {
     public class DataModule
@@ -94,6 +95,12 @@ namespace MClient.App_Code
             public char[] curMsgbuf;
             public Boolean IsSuccess;
         }
+        [Serializable]
+        public struct stCheck
+        {
+            public int PaperNo;
+            public string[] DetailScore;
+        }
     }
 
     public class TDM_Client
@@ -131,6 +138,11 @@ namespace MClient.App_Code
         public int NextPaperNo;
         public DataTable tblScore; //分数
         public int WindowTime;
+        public TDAO DAO;
+        public Boolean FirstFlag; // 是否为第一次获取质量控制文件
+        public Boolean ToCreateImage; //原StartClick变量
+        public UMyRecords.stMyPaper PNextPaper;
+        public DataModule.stCheck[] stCheck;
         public TDM_Client()
         {
             ToClose = false;
@@ -177,6 +189,7 @@ namespace MClient.App_Code
             CsSavePaper = new Object();
             CsPreviewPaper = new Object();
             CsJunk = new Object();
+            CsLogFile = new Object();
             CsCheck = new Object();
             CsGrpUser = new Object();
             CsExcpRsn = new Object();
@@ -196,7 +209,23 @@ namespace MClient.App_Code
             UDPSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             MyVars.UdpCreated = true;
 
-            WindowTime = 5 * 60;
+            WindowTime = 5 * 60;          
+        }
+        public static void CreateDataBase(TDM_Client DM_Client)
+        {
+            string tmpstr1 = new String(DM_Client.MyRecords.UserInfo.LoginName);
+            tmpstr1 = tmpstr1.Substring(0, tmpstr1.IndexOf('\0'));
+            System.IO.Directory.CreateDirectory("C:\\" + tmpstr1 + "mdb");
+            ADOX.CatalogClass cat = new ADOX.CatalogClass();
+            cat.Create("Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=C:\\" + tmpstr1 +"mdb\\Qty.mdb;");  
+        }
+        public static void DeleteDataBase(TDM_Client DM_Client)
+        {
+            DM_Client.DAO.ADOConnection1.Close();
+            string tmpstr1 = new String(DM_Client.MyRecords.UserInfo.LoginName);
+            tmpstr1 = tmpstr1.Substring(0, tmpstr1.IndexOf('\0'));
+            System.IO.Directory.Delete("C:\\" + tmpstr1 + "mdb", true);
+
         }
     }
 }

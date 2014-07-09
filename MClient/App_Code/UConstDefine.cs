@@ -394,6 +394,11 @@ namespace MClient.App_Code
         public const int TM_GETPERQTY_REQ = 0x0106000A;
         public const int TM_GETPERQTY_RSP = 0x0106000B;
 
+        public const int TM_GETFINISHEDPAPERINFO_REQ=0x01020100; //抽查试卷信息请求帧类型
+        public const int TM_GETFINISHEDPAPERINFO_RSP=0x01020101; //抽查试卷信息响应帧类型
+    
+        public const int TM_GETPAPERCOUNT_REQ=0x0106000C;
+        public const int TM_GETPAPERCOUNT_RSP=0x0106000D;
         //定义图片格式
         public const int TIF = 1;
         public const int JPG = 3;

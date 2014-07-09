@@ -342,7 +342,7 @@ namespace MClient.App_Code
                                                 break;
                                             case UConstDefine.ZhengPing:
 
-                                                //如果是取抽查试卷
+                                                //TODO:如果是取抽查试卷
 
                                                 //正常取卷
                                                 GetNewPaper(DM_Client, ref PNewPaper, UConstDefine.PM_PAPERTYPE_NORMAL, 0, DM_Client.MyVars.CurVolName);
@@ -501,7 +501,7 @@ namespace MClient.App_Code
                     case 0:
                         fmGetPaperReq.GetPaperTask.DispOrBlkNo = UConstDefine.PM_GETPAPER_NORMAL;
                         ToGetRef = false;
-                        if ((DM_Client.MyRecords.UserInfo.Role > UConstDefine.XiaoZuZhang) && (PTmpBlkInfo.BlockInfo.DispScore == 1))
+                        if ((DM_Client.MyRecords.UserInfo.Role >= UConstDefine.XiaoZuZhang) && (PTmpBlkInfo.BlockInfo.DispScore == 1))
                         {
                             fmGetPaperReq.GetPaperTask.DispOrBlkNo = UConstDefine.PM_GETPAPER_DISPSCORE;
                             ToGetRef = true;
@@ -889,6 +889,55 @@ namespace MClient.App_Code
 
         public void DealError()
         {
+        }
+    }
+    public class TPreFetchThreadClass
+    {
+        public Thread TPreFetchThread;
+        public int FetchType;
+        public int index;
+        public Boolean ToContinue;
+        public string picTemp;
+        public TPreFetchThreadClass(TDM_Client DM_Client)
+        {
+            ToContinue = true;
+            TPreFetchThread = new Thread(new ThreadStart(delegate() { Execute(DM_Client); }));
+        }
+        public void Execute(TDM_Client DM_Client)
+        {
+            String Mark;
+            UMyRecords.stMyPaper PNextPaper = new UMyRecords.stMyPaper();
+            Boolean NextPaper = false;
+            while (ToContinue)
+            {
+                while (FetchType == -1)
+                {
+                    Thread.Sleep(200);
+                }
+                lock (DM_Client.CsNextPaperNode)
+                {
+                    //TODO:
+                    if (DM_Client.PNextPaper.PaperInfo.PaperNo != 0)// 判断：下一份试卷已经取到
+                    {
+                        if (FetchType == 1)
+                        {
+                            Mark = DM_Client.PNextPaper.PaperInfo.PaperNo.ToString();//1为普通试卷（包括小组长处理的试卷），采用试卷号来唯一标识试卷
+                        }
+                        else //2为大组长异处理常试卷，采用题块号唯一标识试卷
+                        {
+                            Mark = UMyFuncs.GetBlkNo(DM_Client.PNextPaper.PaperInfo.VolumeName.ToString()).ToString();
+                        }
+                        lock (DM_Client.CsNextPaper)
+                        {
+                            DM_Client.PNextPaper.PaperImage.Position = 0;
+                            UMyFuncs.LoadJP2(DM_Client, DM_Client.PNextPaper, picTemp, NextPaper);
+                        }
+                    }
+
+                }
+       //         UMyFuncs.FetchNextPaper(DM_Client, index, FetchType, picTemp);
+                FetchType = -1;
+            }
         }
     }
 }

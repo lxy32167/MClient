@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>基于大数据中心的网上阅卷系统客户端</title>
     <link href="layout.css" rel="stylesheet" type="text/css" />
-    
+
     <script type="text/javascript">
         Date.prototype.DatePart = function (interval) {
             var myDate = new Date();
@@ -46,7 +46,8 @@
         }
         function fullscreen() { //在ie下可行
             var wsh = new ActiveXObject("WScript.Shell");
-            wsh.sendKeys("{F11}");           
+            wsh.sendKeys("{F11}");
+            
         }
     </script>
 </head>
@@ -58,8 +59,8 @@
                 <asp:Label ID="Label1" runat="server" BorderColor="#666666" BorderStyle="Outset" BorderWidth="5px" Font-Bold="True" Font-Italic="True" Font-Names="华文仿宋" Font-Size="XX-Large" ForeColor="White" Text="网上阅卷系统客户端"></asp:Label>
             </div>
             <div id="mainContent">
-                <div id="contentLogin" style="margin-left: auto; margin-right: auto; margin-top: auto;">
-                    <asp:Login ID="LoginUser" runat="server" style="margin-top:150px;margin-left:500px" BackColor="#EEEEFF" DisplayRememberMe="false" InstructionText="输入用户名和密码登陆阅卷系统!" CssClass="loginbody" TitleTextStyle-CssClass="login_title" InstructionTextStyle-CssClass="login_instructions" LoginButtonStyle-CssClass="login_button" TitleText="网上阅卷系统客户端登录" OnAuthenticate="LoginUser_Authenticate" DestinationPageUrl = "~/Main.aspx">
+                <div id="contentLogin" style="text-align: center; margin-left: auto; margin-right: auto; margin-top: auto;">
+                    <asp:Login ID="LoginUser" runat="server" style="margin-top:150px;margin-left:500px" BackColor="#EEEEFF" DisplayRememberMe="false" InstructionText="输入用户名和密码登陆阅卷系统!" CssClass="loginbody" TitleTextStyle-CssClass="login_title" InstructionTextStyle-CssClass="login_instructions" LoginButtonStyle-CssClass="login_button" TitleText="网上阅卷系统客户端登录" OnAuthenticate="LoginUser_Authenticate">
                         <LayoutTemplate>
                             <table cellpadding="1" cellspacing="0" style="border-collapse: collapse;">
                                 <tr>
@@ -94,7 +95,7 @@
                                                     <asp:Label ID="ServerIPLabel" runat="server" AssociatedControlID="ServerIP">服务器IP:</asp:Label>
                                                 </td>
                                                 <td class="auto-style2">
-                                                    <asp:TextBox ID="ServerIP" runat="server" Text="192.168.93.132"></asp:TextBox>
+                                                    <asp:TextBox ID="ServerIP" runat="server" Text="192.168.93.128"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="ServerIPRequired" runat="server" ControlToValidate="ServerIP" ErrorMessage="必须填写“服务器IP”。" ToolTip="必须填写“服务器IP”。" ValidationGroup="LoginUser">*</asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>

@@ -7,6 +7,8 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Runtime.InteropServices;
 using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace MClient.App_Code
 {   
@@ -83,10 +85,10 @@ namespace MClient.App_Code
             public char[] OldPwd;
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = UConstDefine.PwdLen)]
             public char[] NewPwd;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = UConstDefine.NameLen)]
-            public char[] TrueName;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = UConstDefine.ServeForLen)]
-            public char[] ServeFor;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = UConstDefine.NameLen)] //注意有汉字，必须采用ansi字符串与客户端相同
+            public string TrueName;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = UConstDefine.ServeForLen)]
+            public string ServeFor;
         }
         [StructLayout(LayoutKind.Sequential)]
         public struct FM_ChgPwd_Rsp
@@ -904,19 +906,6 @@ namespace MClient.App_Code
             public stMsgHead MsgHead;
             public int RspCode;
         }
-        [StructLayout(LayoutKind.Sequential)]
-        public struct FM_GETPERQTY_REQ
-        {
-            public stMsgHead MsgHead;
-            public Int64 UserID;
-        }
-        [StructLayout(LayoutKind.Sequential)]
-        public struct FM_GETPERQTY_RSP
-        {
-            public stMsgHead MsgHead;
-            public int RspCode;
-            public UMyRecords.stPerQtyInfo PerQtyInfo;
-        }
 
         [StructLayout(LayoutKind.Sequential)]
         public struct stxzstat
@@ -1040,7 +1029,6 @@ namespace MClient.App_Code
             Marshal.FreeHGlobal(structPtr);
             //返回byte数组
             return bytes;
-
         }
         public static object BytesToStruct(byte[] bytes, Type type)
         {
@@ -1064,5 +1052,16 @@ namespace MClient.App_Code
             //返回结构
             return obj;
         }
+        public static T Clone<T>(T RealObject)
+        {
+            using (Stream objectStream = new MemoryStream())
+            {
+                //利用 System.Runtime.Serialization序列化与反序列化完成引用对象的复制  
+                IFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(objectStream, RealObject);
+                objectStream.Seek(0, SeekOrigin.Begin);
+                return (T)formatter.Deserialize(objectStream);
+            }
+        }    
     }
 }

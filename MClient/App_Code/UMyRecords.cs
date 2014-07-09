@@ -563,8 +563,8 @@ namespace MClient.App_Code
             public char[] VolumeName;
             public int ScoreType;
             public int ReasonType;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = UConstDefine.DetailLen)]
-            public char[] DetailScore;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = UConstDefine.DetailLen)]
+            public string DetailScore;
             public uint TimeStamp;
             public int TimeCost;
         }
@@ -689,7 +689,7 @@ namespace MClient.App_Code
             public int score;
         }
         [StructLayout(LayoutKind.Sequential)]
-        public struct stPerQtyInfo
+        public struct stScoreRecord
         {
             public int PaperNO; //试卷号
             public Single FinalScore; //最终分数
@@ -759,18 +759,17 @@ namespace MClient.App_Code
             public Single avg_score;
             public Single nor_score;
         }
-        [StructLayout(LayoutKind.Sequential)]
-        public struct stPerQtyInfo
+       
+    }
+    public class SortUserName : IComparer<UMyRecords.stMyUser>
+    {
+        #region IComparer<UMyRecords.stMyUser> Members
+
+        public int Compare(UMyRecords.stMyUser x, UMyRecords.stMyUser y)
         {
-            public int GPaperCount;
-            public int PChecked;
-            public int PValid;
-            public int GFinished;
-            public int GChecked;
-            public int PSumTime;
-            public int GSumTime;
-            public int PSumScore;
-            public int GSumScore;
+            return new string(x.UserName).CompareTo(new string(y.UserName));
         }
+
+        #endregion
     }
 }
